@@ -20,6 +20,5 @@ namespace ElectionSys.Controllers
             return Ok(addedVoter);
         }
 
-        
     }
 }
