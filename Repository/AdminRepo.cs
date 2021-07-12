@@ -6,44 +6,28 @@ using System.Threading.Tasks;
 
 namespace ElectionSys.Repository
 {
-    public class VoterRepo : DatabaseRepo
+    public class AdminRepo : DatabaseRepo
     {
-        public Voter Add(Voter voter)
+        public Admin Add(Admin admin)
         {
-            DatabaseContext.Voters.Add(voter);
+            DatabaseContext.Admins.Add(admin);
             DatabaseContext.SaveChanges();
-            return voter;
+            return admin;
         }
 
-        public Voter Edit(Voter voter)
+        public Admin Edit(Admin admin)
         {
-            DatabaseContext.Voters.Update(voter);
+            DatabaseContext.Admins.Update(admin);
             DatabaseContext.SaveChanges();
-            return voter;
+            return admin;
         }
 
-        public String Delete(int id)
+        public bool Delete(int id)
         {
-            var voter = DatabaseContext.Voters.Find(id);
-            if (voter != null)
+            var admin = DatabaseContext.Admins.Find(id);
+            if (admin != null)
             {
-                DatabaseContext.Voters.Remove(voter);
-                DatabaseContext.SaveChanges();
-                return "Entity is Removed Successfully";
-            }
-            else
-                return "Error removing the entity";
-        }
-
-
-        public bool DeleteAll(String name)
-        {
-            var voters = from test in DatabaseContext.Voters
-                         where test.Name == name
-                         select test;
-            if (voters != null)
-            {
-                DatabaseContext.Voters.RemoveRange(voters);
+                DatabaseContext.Admins.Remove(admin);
                 DatabaseContext.SaveChanges();
                 return true;
             }
@@ -51,5 +35,20 @@ namespace ElectionSys.Repository
                 return false;
         }
 
+
+        public bool DeleteAll(String name)
+        {
+            var admins = from test in DatabaseContext.Admins
+                         where test.Name == name
+                         select test;
+            if (admins != null)
+            {
+                DatabaseContext.Admins.RemoveRange(admins);
+                DatabaseContext.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

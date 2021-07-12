@@ -20,5 +20,23 @@ namespace ElectionSys.Controllers
             return Ok(addedVoter);
         }
 
+        [HttpPost("api/voter/delete/")]
+        public IActionResult Delete([FromBody] int id)
+        {
+            return Ok(voterRepo.Delete(id));
+        }
+
+        [HttpPost("api/voter/deleteAll/")]
+        public IActionResult DeleteAll([FromBody] String name)
+        {
+            return Ok(voterRepo.DeleteAll(name));
+        }
+
+        [HttpPost("api/voter/edit")]
+        public IActionResult Edit([FromBody] Voter voter)
+        {
+            var editedVoter = voterRepo.Edit(voter);
+            return Ok(editedVoter);
+        }
     }
 }
