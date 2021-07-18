@@ -2,7 +2,7 @@
 
 namespace ElectionSys.Migrations
 {
-    public partial class ModelsAdded : Migration
+    public partial class allModelsUpdated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

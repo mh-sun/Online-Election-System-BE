@@ -22,17 +22,17 @@ namespace ElectionSys.Repository
             return admin;
         }
 
-        public bool Delete(int id)
+        public Admin Delete(int id)
         {
             var admin = DatabaseContext.Admins.Find(id);
             if (admin != null)
             {
                 DatabaseContext.Admins.Remove(admin);
                 DatabaseContext.SaveChanges();
-                return true;
+                return admin;
             }
             else
-                return false;
+                return admin;
         }
 
 
@@ -49,6 +49,11 @@ namespace ElectionSys.Repository
             }
             else
                 return false;
+        }
+
+        public Admin SearchByName(string name)
+        {
+            return DatabaseContext.Admins.SingleOrDefault(admin => admin.Name == name);
         }
     }
 }

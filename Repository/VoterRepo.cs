@@ -22,17 +22,17 @@ namespace ElectionSys.Repository
             return voter;
         }
 
-        public String Delete(int id)
+        public Voter Delete(int id)
         {
             var voter = DatabaseContext.Voters.Find(id);
             if (voter != null)
             {
                 DatabaseContext.Voters.Remove(voter);
                 DatabaseContext.SaveChanges();
-                return "Entity is Removed Successfully";
+                return voter;
             }
             else
-                return "Error removing the entity";
+                return voter;
         }
 
 
@@ -49,6 +49,11 @@ namespace ElectionSys.Repository
             }
             else
                 return false;
+        }
+
+        public Voter[] getAll()
+        {
+            return DatabaseContext.Voters.ToArray();
         }
 
     }

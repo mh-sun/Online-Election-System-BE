@@ -25,21 +25,21 @@ namespace ElectionSys
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             //services.AddControllers();
-            //services.AddCors();
-
-            /*services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            });
-
+            /*services.AddCors();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200");
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            });
+
+
 
             services.AddControllers();*/
         }

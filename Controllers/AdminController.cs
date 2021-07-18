@@ -38,5 +38,22 @@ namespace ElectionSys.Controllers
             var editedAdmin = adminRepo.Edit(admin);
             return Ok(editedAdmin);
         }
+
+        [HttpPost("api/admin/check")]
+        public IActionResult Check([FromBody] Admin admin)
+        {
+            var searchResult = adminRepo.SearchByName(admin.Name);
+            if(searchResult != null)
+            {
+                if (searchResult.Password == admin.Password)
+                {
+                    return Ok(searchResult.Id);
+                }
+                else return Ok(false);
+            }
+            else return Ok(false);
+
+        }
+
     }
 }

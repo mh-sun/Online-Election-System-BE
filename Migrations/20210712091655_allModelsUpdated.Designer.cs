@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectionSys.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210710210425_ModelsAdded")]
-    partial class ModelsAdded
+    [Migration("20210712091655_allModelsUpdated")]
+    partial class allModelsUpdated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
