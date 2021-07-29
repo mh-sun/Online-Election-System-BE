@@ -22,13 +22,9 @@ namespace ElectionSys.Repository
 
         public bool Edit(Admin admin)
         {
-            if (DatabaseContext.Admins.SingleOrDefault(e => e.username == admin.username) == null)
-            {
-                DatabaseContext.Admins.Update(admin);
-                DatabaseContext.SaveChanges();
-                return true;
-            }
-            else return false;
+            DatabaseContext.Admins.Update(admin);
+            DatabaseContext.SaveChanges();
+            return true;
         }
 
         public bool Delete(String username)
