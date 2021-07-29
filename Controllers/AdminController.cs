@@ -16,44 +16,45 @@ namespace ElectionSys.Controllers
         [HttpPost("api/admin/add")]
         public IActionResult Add([FromBody] Admin admin)
         {
-            var addedAdmin = adminRepo.Add(admin);
-            return Ok(addedAdmin);
+            return Ok(adminRepo.Add(admin));
         }
 
-        [HttpPost("api/admin/delete/")]
-        public IActionResult Delete([FromBody] int id)
+        [HttpDelete("api/admin/delete")]
+        public IActionResult Delete(String username)
         {
-            return Ok(adminRepo.Delete(id));
+            return Ok(adminRepo.Delete(username));
         }
 
-        [HttpPost("api/admin/deleteAll/")]
-        public IActionResult DeleteAll([FromBody] String name)
-        {
-            return Ok(adminRepo.DeleteAll(name));
-        }
+
 
         [HttpPost("api/admin/edit")]
         public IActionResult Edit([FromBody] Admin admin)
         {
-            var editedAdmin = adminRepo.Edit(admin);
-            return Ok(editedAdmin);
+            return Ok(adminRepo.Edit(admin));
         }
 
         [HttpPost("api/admin/check")]
         public IActionResult Check([FromBody] Admin admin)
         {
-            var searchResult = adminRepo.SearchByName(admin.Name);
-            if(searchResult != null)
-            {
-                if (searchResult.Password == admin.Password)
-                {
-                    return Ok(searchResult.Id);
-                }
-                else return Ok(false);
-            }
-            else return Ok(false);
-
+            return Ok(adminRepo.CheckInfo(admin));
         }
 
+        [HttpPost("api/admin/get")]
+        public IActionResult Get([FromBody]int id)
+        {
+            return Ok(adminRepo.GetByID(id));
+        }
+
+        [HttpPost("api/admin/get")]
+        public IActionResult Get([FromBody] String username)
+        {
+            return Ok(adminRepo.GetByName(username));
+        }
+
+        [HttpGet("api/admin/getAll")]
+        public IActionResult GetAll()
+        {
+            return Ok(adminRepo.GetAll());
+        }
     }
 }

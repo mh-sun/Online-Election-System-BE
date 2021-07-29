@@ -11,9 +11,10 @@ namespace ElectionSys.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public String Name { get; set; }
-        public String Password { get; set; }
+        public int id { get; set; }
+        public String fullname { get; set; }
+        public String username { get; set; }
+        public String password { get; set; }
 
     }
 }

@@ -20,81 +20,124 @@ namespace ElectionSys.Migrations
 
             modelBuilder.Entity("ElectionSys.Models.Admin", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("fullname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            fullname = "Institute Of Information Technology",
+                            password = "123",
+                            username = "iit"
+                        },
+                        new
+                        {
+                            id = 2,
+                            fullname = "Mehedi Hasan Sun",
+                            password = "123",
+                            username = "mehedi"
+                        });
                 });
 
             modelBuilder.Entity("ElectionSys.Models.Candidate", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("E_Id")
+                    b.Property<int>("e_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("e_name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Symbol")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VoteCount")
+                    b.Property<string>("symbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("vote_count")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Candidates");
                 });
 
             modelBuilder.Entity("ElectionSys.Models.Election", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("C_Id")
+                    b.Property<int>("c_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("FreezeStatus")
+                    b.Property<string>("date")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PublishStatus")
+                    b.Property<string>("freeze_status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("publish_status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("winner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
 
                     b.ToTable("Elections");
                 });
 
             modelBuilder.Entity("ElectionSys.Models.Voter", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("date_of_birth")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("voted")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
 
                     b.ToTable("Voters");
                 });

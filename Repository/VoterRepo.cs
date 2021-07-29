@@ -8,18 +8,23 @@ namespace ElectionSys.Repository
 {
     public class VoterRepo : DatabaseRepo
     {
-        public Voter Add(Voter voter)
+        public bool Add(Voter voter)
         {
-            DatabaseContext.Voters.Add(voter);
-            DatabaseContext.SaveChanges();
-            return voter;
+            
+            if (DatabaseContext.Voters.SingleOrDefault(e => e.email == voter.email) == null)
+            {
+                DatabaseContext.Voters.Add(voter);
+                DatabaseContext.SaveChanges();
+                return true;
+            }
+            else return false;
         }
 
-        public Voter Edit(Voter voter)
+        public bool Edit(Voter voter)
         {
             DatabaseContext.Voters.Update(voter);
             DatabaseContext.SaveChanges();
-            return voter;
+            return true;
         }
 
         public Voter Delete(int id)
@@ -36,25 +41,27 @@ namespace ElectionSys.Repository
         }
 
 
-        public bool DeleteAll(String name)
+        public List<Voter> getAll()
         {
-            var voters = from test in DatabaseContext.Voters
-                         where test.Name == name
-                         select test;
-            if (voters != null)
+            return DatabaseContext.Voters.ToList();
+        }
+        public Voter CheckInfo(Voter voter)
+        {
+            Voter searchResult = DatabaseContext.Voters.Where(e=>e.email == voter.email).FirstOrDefault();
+            if (searchResult != null)
             {
-                DatabaseContext.Voters.RemoveRange(voters);
-                DatabaseContext.SaveChanges();
-                return true;
+                if (searchResult.password == voter.password)
+                {
+                    return searchResult;
+                }
+                else return null;
             }
-            else
-                return false;
+            else return null;
         }
 
-        public Voter[] getAll()
+        public Voter GetByID(int id)
         {
-            return DatabaseContext.Voters.ToArray();
+            return DatabaseContext.Voters.Find(id);
         }
-
     }
 }

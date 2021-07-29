@@ -16,33 +16,43 @@ namespace ElectionSys.Controllers
         [HttpPost("api/candidate/add")]
         public IActionResult Add([FromBody] Candidate candidate)
         {
-            var addedCandidate = candidateRepo.Add(candidate);
-            return Ok(candidate);
+            return Ok(candidateRepo.Add(candidate));
         }
 
         [HttpPost("api/candidate/edit")]
         public IActionResult Edit([FromBody] Candidate candidate)
         {
-            var editedCandidate = candidateRepo.Edit(candidate);
-            return Ok(editedCandidate);
+            return Ok(candidateRepo.Edit(candidate));
         }
 
-        [HttpPost("api/candidate/delete/")]
-        public IActionResult Delete([FromBody] int id)
+        [HttpDelete("api/candidate/delete")]
+        public IActionResult Delete( int id)
         {
             return Ok(candidateRepo.Delete(id));
         }
-
-        [HttpPost("api/candidate/deleteall/")]
-        public IActionResult DeleteAll([FromBody] String name)
+        [HttpDelete("api/candidate/deleteall")]
+        public IActionResult DeleteAllByEId(int id)
         {
-            return Ok(candidateRepo.DeleteAll(name));
+            return Ok(candidateRepo.DeleteByEId(id));
         }
 
-        [HttpPost("api/candidate/getall/")]
+
+        [HttpGet("api/candidate/getall")]
         public IActionResult GetAll()
         {
             return Ok(candidateRepo.GetAll());
+        }
+
+        [HttpPost("api/candidate/getbyeid")]
+        public IActionResult Get([FromBody] int eid)
+        {
+            return Ok(candidateRepo.GetByEId(eid));
+        }
+
+        [HttpPost("api/candidate/vote")]
+        public IActionResult Vote([FromBody] int[] ids)
+        {
+            return Ok(candidateRepo.Vote(ids));
         }
 
     }

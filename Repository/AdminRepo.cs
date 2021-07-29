@@ -1,4 +1,5 @@
 ﻿using ElectionSys.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,42 +9,34 @@ namespace ElectionSys.Repository
 {
     public class AdminRepo : DatabaseRepo
     {
-        public Admin Add(Admin admin)
+        public bool Add(Admin admin)
         {
-            DatabaseContext.Admins.Add(admin);
-            DatabaseContext.SaveChanges();
-            return admin;
+            if (DatabaseContext.Admins.SingleOrDefault(e => e.username == admin.username) == null)
+            {
+                DatabaseContext.Admins.Add(admin);
+                DatabaseContext.SaveChanges();
+                return true;
+            }
+            else return false;
         }
 
-        public Admin Edit(Admin admin)
+        public bool Edit(Admin admin)
         {
-            DatabaseContext.Admins.Update(admin);
-            DatabaseContext.SaveChanges();
-            return admin;
+            if (DatabaseContext.Admins.SingleOrDefault(e => e.username == admin.username) == null)
+            {
+                DatabaseContext.Admins.Update(admin);
+                DatabaseContext.SaveChanges();
+                return true;
+            }
+            else return false;
         }
 
-        public Admin Delete(int id)
+        public bool Delete(String username)
         {
-            var admin = DatabaseContext.Admins.Find(id);
+            Admin admin = GetByName(username);
             if (admin != null)
             {
                 DatabaseContext.Admins.Remove(admin);
-                DatabaseContext.SaveChanges();
-                return admin;
-            }
-            else
-                return admin;
-        }
-
-
-        public bool DeleteAll(String name)
-        {
-            var admins = from test in DatabaseContext.Admins
-                         where test.Name == name
-                         select test;
-            if (admins != null)
-            {
-                DatabaseContext.Admins.RemoveRange(admins);
                 DatabaseContext.SaveChanges();
                 return true;
             }
@@ -51,9 +44,33 @@ namespace ElectionSys.Repository
                 return false;
         }
 
-        public Admin SearchByName(string name)
+        public Admin GetByName(string username)
         {
-            return DatabaseContext.Admins.SingleOrDefault(admin => admin.Name == name);
+            return DatabaseContext.Admins.SingleOrDefault(admin => admin.username == username);
         }
+
+        public Admin GetByID(int id)
+        {
+            return DatabaseContext.Admins.Find(id);
+        }
+
+        public List<Admin> GetAll()
+        {
+            return DatabaseContext.Admins.ToList();
+        }
+        public bool CheckInfo(Admin admin)
+        {
+            Admin searchResult = GetByName(admin.username);
+            if (searchResult != null)
+            {
+                if (searchResult.password == admin.password)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else return false;
+        }
+
     }
 }

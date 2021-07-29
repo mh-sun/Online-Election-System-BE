@@ -11,9 +11,12 @@ namespace ElectionSys.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public int C_Id { get; set; }
-        public String FreezeStatus { get; set; }
-        public String PublishStatus { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string date { get; set; }
+        public int c_id { get; set; }
+        public string winner { get; set; }
+        public string freeze_status { get; set; }
+        public string publish_status { get; set; }
     }
 }

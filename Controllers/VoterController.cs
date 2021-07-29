@@ -20,23 +20,16 @@ namespace ElectionSys.Controllers
             return Ok(addedVoter);
         }
 
-        [HttpPost("api/voter/delete/")]
+        [HttpDelete("api/voter/delete")]
         public IActionResult Delete(int id)
         {
             return Ok(voterRepo.Delete(id));
         }
 
-        [HttpPost("api/voter/deleteAll/")]
-        public IActionResult DeleteAll(String name)
-        {
-            return Ok(voterRepo.DeleteAll(name));
-        }
-
         [HttpPost("api/voter/edit")]
         public IActionResult Edit([FromBody] Voter voter)
         {
-            var editedVoter = voterRepo.Edit(voter);
-            return Ok(editedVoter);
+            return Ok(voterRepo.Edit(voter));
         }
 
         [HttpGet("api/voter/getAll")]
@@ -44,7 +37,17 @@ namespace ElectionSys.Controllers
         {
             return Ok(voterRepo.getAll());
         }
-       
 
+        [HttpPost("api/voter/check")]
+        public IActionResult Check([FromBody] Voter voter)
+        {
+            return Ok(voterRepo.CheckInfo(voter));
+        }
+
+        [HttpGet("api/voter/get")]
+        public IActionResult Get(int id)
+        {
+            return Ok(voterRepo.GetByID(id));
+        }
     }
 }
